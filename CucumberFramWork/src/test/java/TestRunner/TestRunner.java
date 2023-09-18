@@ -12,9 +12,10 @@ import io.cucumber.junit.CucumberOptions;
                  dryRun=false, //if check feature file Implemention in the stepDef File 
                  monochrome=false,
                  plugin= {"pretty","html:target/Cucumber-report/report1.html"}
-                 
-		
-		)
+                	)
 public class TestRunner {
 
 }
+
+//plugin= {"pretty","json:target/Cucumber-report/report2.json"}
+//plugin= {"pretty","junit:target/Cucumber-report/report3.xml"}
