@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
+import PageObject.AddCustomer;
 import PageObject.LoginPageObj;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -16,6 +17,7 @@ public class LoginStepDef {
 
 	public WebDriver driver;
 	public LoginPageObj loginpage;
+	public AddCustomer addcustomer;
 
 @Given("user browe url as {string}")
 public void user_browe_url_as(String url) {
@@ -27,6 +29,7 @@ public void user_browe_url_as(String url) {
 	  option.addArguments("--remote-allow-origins=*");
 	  driver =new ChromeDriver(option);
 	  loginpage=new LoginPageObj(driver);
+	  addcustomer=new AddCustomer(driver);
 	 
 	  driver.get(url);
 	  driver.manage().window().maximize();
@@ -76,6 +79,93 @@ public void page_title_should_be(String expected) {
 public void closed_brower() {
   driver.close();
 }
+
+
+
+//================================================
+
+@When("click on customer")
+public void click_on_customer() {
+	
+	
+	addcustomer.customerTab();
+}
+
+@When("click on add customer")
+public void click_on_add_customer() {
+	
+	addcustomer.customerPage();
+    
+}
+
+@Then("cutomers page should be displayed")
+public void cutomers_page_should_be_displayed() {
+	
+	String actual=addcustomer.getcustomerPageTitle();
+	Assert.assertEquals(actual, "Customers");
+
+}
+
+@When("click on add new customer")
+public void click_on_add_new_customer() {
+	
+	addcustomer.Addnewcustomer();
+   
+}
+
+@Then("add a new customer page should be displayed")
+public void add_a_new_customer_page_should_be_displayed() {
+	
+String actual=	addcustomer.verifynewcustomerPage();
+Assert.assertEquals(actual, "Add a new customer back to customer list");
+	
+
+}
+
+@When("fill the customer info")
+public void fill_the_customer_info() {
+	addcustomer.EmailField("amitgondcse@gmail.com");
+	
+	addcustomer.PasswordField("amit123@123");
+	addcustomer.FirstNameField("Amit");
+	addcustomer.LastNameField("Gond");
+	addcustomer.MaleRadio();
+	addcustomer.DateOfBirth("03/24/1986");
+	addcustomer.CompanyName("XYZ");
+	addcustomer.Istaxexempt();
+	addcustomer.SelectNewsletter();
+	addcustomer.ManageOfVendor();
+	addcustomer.AdminComment("this is workflow has to be followed while ");
+    
+}
+
+@When("save customer info")
+public void save_customer_info() {
+	addcustomer.save();
+	
+   
+}
+
+@Then("customer info save message should be displayed")
+public void customer_info_save_message_should_be_displayed() {
+	
+	String actualmessage= addcustomer.getsavemessage();
+	
+	Assert.assertEquals(actualmessage, "The new customer has been added successfully.");
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
