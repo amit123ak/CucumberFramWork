@@ -16,3 +16,20 @@ Then customer info save message should be displayed
 When click on the logout button 
 Then page Title should be "Your store. Login" 
 And closed brower 
+
+
+
+Scenario: User perfomrs Search
+Given user browe url as "https://admin-demo.nopcommerce.com/login" 
+When user enter the username as "admin@yourstore.com" and password as "admin"
+And user click on the login in
+Then page Title shoud be "Dashboard / nopCommerce administration"
+When  click on customer 
+And  click on add customer
+Then cutomers page should be displayed 
+When  user enter the email as "rvnxx38gw@gmail.com" into emailfiled 
+And   user click on the Search button 
+Then  gmail should be present in the Search result 
+When click on the logout button 
+Then page Title should be "Your store. Login" 
+And closed brower 

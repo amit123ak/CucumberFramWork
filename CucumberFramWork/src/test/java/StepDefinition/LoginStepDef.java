@@ -7,6 +7,10 @@ import org.testng.Assert;
 
 import PageObject.AddCustomer;
 import PageObject.LoginPageObj;
+import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,10 +22,30 @@ public class LoginStepDef {
 	public WebDriver driver;
 	public LoginPageObj loginpage;
 	public AddCustomer addcustomer;
+	
+	
+@After("@login")	
+public void teardown()
+{
+	System.out.println("closed driver");
+	driver.close();
+}
 
+@BeforeStep
+public void beforeStep()
+{
+System.out.println("this is before step hook");	
+}
+
+
+@AfterStep
+public void afterstep()
+{
+System.out.println("this is After step hook");	
+}
 @Given("user browe url as {string}")
 public void user_browe_url_as(String url) {
-	WebDriverManager.chromedriver().setup();
+	WebDriverManager.chromedriver().clearResolutionCache().setup();
 	  
 	  ChromeOptions option=new ChromeOptions();
 	  
